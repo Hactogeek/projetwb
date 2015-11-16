@@ -1,6 +1,4 @@
 <?php
-	
-	//Vérifier qu'un membre n'a pas la même adresse mail 
 
 	$dns_bdd="mysql:host=localhost;dbname=webDynamique";		//Adresse du serveur
 	$user_bdd="root";											//Id de connection (login)
@@ -20,32 +18,53 @@
 	if(isset($_POST['INSCRIPTION']))
 	{
 
-		echo "OK";
-
 		//Ont verifie que tout les champs ont bien ete rempli
 
 		if(isset($_POST['NAME'], $_POST['FIRST_NAME'], $_POST['EMAIL'], $_POST['PASSWORD'], $_POST['PASSWORD_CONFIRM']))
 		{
-			
-			echo "OK2";
 
-			//Ont regarde si le PASSWORD et sa confirmation sont identique
+			//Ont regarde si un utilisateur n'as pas le même EMAIL qu'un utilisateur deja inscrit sur le site
 
-			if($_POST['PASSWORD'] == $_POST['PASSWORD_CONFIRM'])
+			$present=0;
+
+			$reponse = $bdd->query('SELECT EMAIL FROM VR_grp1_Users WHERE EMAIL=\''.$_POST['EMAIL'].'\'');
+
+			while ($donnees = $reponse->fetch())
 			{
+    			if($donnees['EMAIL'] == $_POST['EMAIL'])
+    			{
+    				$present=1;
+    			}
+			}
 
-				//Requete SQL pour inscrire le nouveau membre dans la base de donnee
+			$reponse->closeCursor();
 
-				$req = $bdd->prepare('INSERT INTO VR_grp1_Users(NAME, FIRST_NAME, EMAIL, PASSWORD, REGISTRATION_DATE) 
-				VALUES(:NAME, :FIRST_NAME, :EMAIL, :PASSWORD, :REGISTRATION_DATE)');
-			
-				$req->execute(array(
-					'NAME' => $_POST['NAME'],
-					'FIRST_NAME' => $_POST['FIRST_NAME'],
-					'EMAIL' => $_POST['EMAIL'],
-					'PASSWORD' => md5($_POST['PASSWORD']),
-					'REGISTRATION_DATE' => date("Y-m-d H:i:s")
-				));
+			if($present==0)
+			{
+				
+				//Ont regarde si le PASSWORD et sa confirmation sont identique
+
+				if($_POST['PASSWORD'] == $_POST['PASSWORD_CONFIRM'])
+				{
+
+					//Requete SQL pour inscrire le nouveau membre dans la base de donnee
+
+					$req = $bdd->prepare('INSERT INTO VR_grp1_Users(NAME, FIRST_NAME, EMAIL, PASSWORD, REGISTRATION_DATE) 
+					VALUES(:NAME, :FIRST_NAME, :EMAIL, :PASSWORD, :REGISTRATION_DATE)');
+				
+					$req->execute(array(
+						'NAME' => $_POST['NAME'],
+						'FIRST_NAME' => $_POST['FIRST_NAME'],
+						'EMAIL' => $_POST['EMAIL'],
+						'PASSWORD' => md5($_POST['PASSWORD']),
+						'REGISTRATION_DATE' => date("Y-m-d H:i:s")
+					));
+					header('index.php');
+				}
+			}
+			else
+			{
+				echo "Un utilisateur possède le même email que vous ! ";
 			}
 		}
 	}
