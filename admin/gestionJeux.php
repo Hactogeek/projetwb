@@ -8,7 +8,7 @@
 	<body>
 		<?php include("includes/header.php"); ?>
 		<section>
-		  	
+		  	<h2>Gestion Des Jeux</h2>
 		</section>
 	  	<footer>
 
