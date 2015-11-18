@@ -21,6 +21,16 @@ h1{
   color:#5695c7;
 }
 
+h2{
+	text-align: center;
+	font-family: Arial;
+}
+
+h3{
+	text-align: center;
+	font-family: Arial;
+}
+
 nav
 {
     display: inline-block;
@@ -57,6 +67,11 @@ nav a:hover
     width: 100px;
 }
 
+article{
+	margin-bottom: 100px;
+}
+
+
 form.rechercher{
 	display: inline-block;
 	float:right;
@@ -65,15 +80,17 @@ form.rechercher{
 	line-height: 30px;
 }
 
-h2{
-	text-align: center;
-	font-family: Arial;
-}
-
 form.inscription{
 	width: 50%;
-	position: absolute;
+	position: relative;
 	left: 25%;
+}
+
+form.modifier{
+	width: 50%;
+	position: relative;
+	left: 25%;
+	/*height:300px;*/
 }
 
 form.connexion{
@@ -91,6 +108,11 @@ label{
 }
 
 input.inputInscription{
+	width: 70%;
+	float: right;
+}
+
+select.selectedInscription{
 	width: 70%;
 	float: right;
 }
@@ -127,7 +149,7 @@ table{
 	border: 1px solid black;
 	border-collapse: collapse;
 	width: 70%;
-	position: absolute;
+	position: relative;
 	left: 15%;
 }
 
@@ -135,6 +157,7 @@ th, td{
 	border: 1px solid black;
 	text-align: center;
 }
+
 a{
 	text-decoration: none;
 }

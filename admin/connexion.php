@@ -50,7 +50,7 @@
 		<section>
 		  	<h2>Connexion - Administration</h2>
 			<form class="connexion" action="connexion.php" method="post">
-			  	<label> Identifiant :<input class="inputInscription" type="email" name="IDENTIFIANT" /></label><br/>
+			  	<label> Identifiant :<input class="inputInscription" type="text" name="IDENTIFIANT" /></label><br/>
 			  	<label> MDP :<input class="inputInscription" type="password" name="PASSWORD" /></label><br/>
 			  	<div class="centrage">
 			  		<input class="buttonInscription" type="submit" value="Connexion" name="CONNEXION"/>
