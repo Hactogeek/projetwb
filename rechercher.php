@@ -7,8 +7,8 @@
 	</head>
 	<body><?php
 $Serveur="info.univ-lemans.fr";
-$Utilisateur="info201a_user";
-$MotDePasse="com72";
+$Utilisateur="";
+$MotDePasse="";
 $Base="info201a";
 $LienBase=mysql_connect($Serveur,$Utilisateur,$MotDePasse);
 $retour=mysql_select_db($Base,$LienBase);
