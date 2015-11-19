@@ -39,17 +39,7 @@
 		{
 			if(!empty($_POST['NOM']) && !empty($_POST['AGE']) && !empty($_POST['TYPE']) && !empty($_POST['JOUEUR']) && !empty($_POST['QUANTITE']) && !empty($_POST['DESCRIPTION']))
 			{
-				$req = $bdd->prepare('UPDATE VR_grp1_Jeux SET NOM = :NVNOM, DESCRIPTION = :NVDESCRIPTION, IMAGE, AGE = :NVAGE, TYPE = :NVTYPE, JOUEUR = :NVJOUEUR, QUANTITE = :NVQUANTITE, STOCK = :NVSTOCK) WHERE ID=\''.$_POST['ID'].'\'');
-				$req->execute(array(
-					'NVNOM' => $_POST['NOM'],
-					'NVDESCRIPTION' => $_POST['DESCRIPTION'],
-					'IMAGE' => $_POST['DESCRIPTION'],
-					'NVAGE' => $_POST['AGE'],
-					'NVTYPE' => $_POST['TYPE'],
-					'NVJOUEUR' => $_POST['JOUEUR'],
-					'NVQUANTITE' => $_POST['QUANTITE'],
-					'NVSTOCK' => $_POST['QUANTITE']
-					));
+				 
 				header("Location: gestionJeux.php");
 			}
 		}

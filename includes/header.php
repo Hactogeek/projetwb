@@ -1,6 +1,3 @@
-<?php
-	session_start();
-?>
 <div id="header"></div> 
 <header>
 	<h1>LUDOTHEQUE</h1>
@@ -21,6 +18,8 @@
 		   		if($_SESSION['connect']==1)
 		   		{
 		   		?>
+		   			<li><a href="panier.php" name="PANIER">Panier</a></li>
+		   			<li><a href="commande.php" name="COMMANDE">Commande</a></li>
 		   			<li><a href="connexion.php?DECONNEXION=1" name="DECONNEXION">Deconnexion</a></li>
 		   		<?php		
 		   		}

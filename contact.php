@@ -1,3 +1,7 @@
+<?php
+	include('includes/config.php');
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,9 +14,24 @@
 		<section>
 		  	<h2>Contact</h2>
 			<form class="inscription">
-			  	<label> Nom :<input class="inputInscription" type="text" name="nom" /></label><br/>
-			  	<label> Prenom :<input class="inputInscription" type="text" name="prenom" /></label><br/>
-				<label> Email :<input class="inputInscription" type="text" name="mails" /></label><br/>
+				<?php 
+					if($_SESSION['connect']!=1)
+		   			{
+		   				?>
+			  			<label> Nom :<input class="inputInscription" type="text" name="NOM" /></label><br/>
+			  			<label> Prenom :<input class="inputInscription" type="text" name="PRENOM" /></label><br/>
+						<label> Email :<input class="inputInscription" type="text" name="EMAIL" /></label><br/>
+						<?php 
+					}
+					else
+					{
+						?>
+							<input type="hidden"  name="NOM" value=<?php echo $_SESSION['NOM']; ?> />
+							<input type="hidden"  name="PRENOM" value=<?php echo $_SESSION['PRENOM']; ?> />
+							<input type="hidden"  name="EMAIL" value=<?php echo $_SESSION['EMAIL']; ?> />
+						<?php
+					}
+				?>
 				<label> Objet :<input class="inputInscription" type="text" name="mdp" /></label><br/>
 			  	<label> Message :<br/>
 			  	<textarea></textarea></label><br/>

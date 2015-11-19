@@ -1,3 +1,7 @@
+<?php
+	include('includes/config.php');
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,14 +22,36 @@
 	  				<th>Stock</th>
 	  				<th>Réservation</th>
 	  			</tr>
-	  			<tr>
-	  				<td></td>
-	  				<td>Personn of Interest</td>
-	  				<td></td>
-	  				<td>10 ans</td>
-	  				<td>3</td>
-	  				<td><a href="contact.html"><input type="submit" value="RÉSERVER"/></a></td>
-	  			</tr>
+	  			<?php
+					$reponse = $bdd->query('SELECT * FROM VR_grp1_Jeux');
+
+					while ($donnees = $reponse->fetch())
+					{
+						?>
+			  			<tr>
+					  		<td><?php echo $donnees['NOM']; ?></td>
+					  		<td><?php echo $donnees['DESCRIPTION']; ?></td>
+							<td><?php echo $donnees['TYPE']; ?></td>
+					  		<td><?php echo $donnees['AGE']; ?></td>
+					  		<td><?php echo $donnees['QUANTITE']; ?></td>
+					  		<td><?php echo $donnees['STOCK']; ?></td>
+					  		<?php
+					  			if($_SESSION['connect']==1)
+					  			{
+					  				?>
+						  			<td><form action="reserver.php" method="post">
+						  				<input type="hidden" name="ID" value=<?php echo $donnees['ID']; ?> />
+						  				<input type="submit" name="RESERVER" value="RESERVER"/>
+						  			</form></td>
+					  				<?php
+					  			}
+					  		?>
+					  	</tr>
+						<?php
+					}
+
+					$reponse->closeCursor();
+				?>
 	  		</table>
 	  	</section>
 	  	<footer>

@@ -1,17 +1,6 @@
 <?php
-
-	$dns_bdd="mysql:host=localhost;dbname=webDynamique";		//Adresse du serveur
-	$user_bdd="root";											//Id de connection (login)
-	$mdp_bdd="root";											//Mot de passe
-
-	try 
-	{
-		$bdd = new PDO($dns_bdd, $user_bdd, $mdp_bdd);
-	}
-	catch (Exeption $e)
-	{
-		die('Erreur : ' . $e->getMessage());
-	}
+	
+	include('includes/config.php');
 
 	//Ont verifie que le formulaire a bien ete envoye pour inscription
 
@@ -20,7 +9,7 @@
 
 		//Ont verifie que tout les champs ont bien ete rempli
 
-		if(isset($_POST['NAME'], $_POST['FIRST_NAME'], $_POST['EMAIL'], $_POST['PASSWORD'], $_POST['PASSWORD_CONFIRM']))
+		if(!empty($_POST['NAME']) && !empty($_POST['FIRST_NAME']) && !empty($_POST['EMAIL']) && !empty($_POST['PASSWORD']) && !empty($_POST['PASSWORD_CONFIRM']))
 		{
 
 			//Ont regarde si un utilisateur n'as pas le même EMAIL qu'un utilisateur deja inscrit sur le site
@@ -59,7 +48,11 @@
 						'PASSWORD' => md5($_POST['PASSWORD']),
 						'REGISTRATION_DATE' => date("Y-m-d H:i:s")
 					));
-					header('index.php');
+					header('connexion.php');
+				}
+				else
+				{
+					echo "La confirmation du mot de passe n'est pas correct";
 				}
 			}
 			else
