@@ -1,4 +1,4 @@
-<?php
+ <?php
 	
 	include('includes/config.php');
 
@@ -48,7 +48,7 @@
 						'PASSWORD' => md5($_POST['PASSWORD']),
 						'REGISTRATION_DATE' => date("Y-m-d H:i:s")
 					));
-					header('connexion.php');
+					header("Location: connexion.php");
 				}
 				else
 				{
