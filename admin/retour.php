@@ -56,6 +56,7 @@
 				  			<td><form action="retour.php" method="post">
 				  				<input type="hidden" name="IDCOMMANDE" value=<?php echo $donnees[0]; ?> />
 				  				<input type="hidden" name="IDJEUX" value=<?php echo $donnees['IDJEUX']; ?> />
+				  				<input type="hidden" name="STOCK" value=<?php echo $donnees['STOCK']; ?> />
 				  				<input type="submit" name="RETOUR" value="RETOUR"/>
 			  				</form></td>
 					  	</tr>
