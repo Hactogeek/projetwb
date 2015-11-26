@@ -1,5 +1,5 @@
 <?php
-	session_start();
+	include('includes/config.php');
 
 	//----------------------------DECONNEXION--------------------------------------
 
@@ -18,7 +18,7 @@
 	if(isset($_POST['CONNEXION']))
 	{
 		// Ont vérifie que les variables saisi dans la formulaire par l'utilisateur existe
-		if(isset($_POST['IDENTIFIANT'], $_POST['PASSWORD']))
+		if(!empty($_POST['IDENTIFIANT']) && !empty($_POST['PASSWORD']))
 		{
     		$ADMIN="admin";
 
