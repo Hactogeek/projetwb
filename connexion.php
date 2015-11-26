@@ -6,7 +6,7 @@
 	if(isset($_GET['DECONNEXION']) && $_GET['DECONNEXION']==1)
 	{
 		session_destroy();
-		header("Location: index.php");
+		header("Location: connexion.php");
 	}
 
 	//-----------------------------------------------------------------------------

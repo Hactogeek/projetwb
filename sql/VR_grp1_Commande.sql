@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost:8889
--- Généré le :  Ven 13 Novembre 2015 à 11:48
+-- Généré le :  Dim 22 Novembre 2015 à 11:04
 -- Version du serveur :  5.5.42
 -- Version de PHP :  5.6.10
 
@@ -23,34 +23,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `VR_grp1_Users`
+-- Structure de la table `VR_grp1_Commande`
 --
 
-CREATE TABLE `VR_grp1_Users` (
+CREATE TABLE `VR_grp1_Commande` (
   `ID` int(11) NOT NULL,
-  `NAME` varchar(255) NOT NULL,
-  `FIRST_NAME` varchar(255) NOT NULL,
-  `EMAIL` varchar(255) NOT NULL,
-  `PASSWORD` varchar(255) NOT NULL,
-  `REGISTRATION_DATE` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `VR_grp1_Users`
---
-
-INSERT INTO `VR_grp1_Users` (`ID`, `NAME`, `FIRST_NAME`, `EMAIL`, `PASSWORD`, `REGISTRATION_DATE`) VALUES
-(1, 'Marteau', 'Tony', 'tony.marteau@outlook.com', 'pn03cnt9', '2015-11-13'),
-(2, 'test', 'test', 'test@test.fr', '098f6bcd4621d373cade4e832627b4f6', '2015-11-13');
+  `IDUSER` int(11) NOT NULL,
+  `IDJEUX` int(11) NOT NULL,
+  `DATERECUP` datetime NOT NULL,
+  `DATERETOUR` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Index pour les tables exportées
 --
 
 --
--- Index pour la table `VR_grp1_Users`
+-- Index pour la table `VR_grp1_Commande`
 --
-ALTER TABLE `VR_grp1_Users`
+ALTER TABLE `VR_grp1_Commande`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -58,10 +49,10 @@ ALTER TABLE `VR_grp1_Users`
 --
 
 --
--- AUTO_INCREMENT pour la table `VR_grp1_Users`
+-- AUTO_INCREMENT pour la table `VR_grp1_Commande`
 --
-ALTER TABLE `VR_grp1_Users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+ALTER TABLE `VR_grp1_Commande`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

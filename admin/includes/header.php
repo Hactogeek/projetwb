@@ -1,6 +1,3 @@
-<?php
-	session_start();
-?>
 <div id="header"></div> 
 <header>
 	<h1>LUDOTHEQUE</h1>
@@ -22,7 +19,10 @@
 		   		?>
 		   			<li><a href="gestionJeux.php">Gestion Des Jeux</a></li>
 		   			<li><a href="gestionMembres.php">Gestion Des Membres</a></li>
+		   			<li><a href="retour.php">Retour</a></li>
+		   			<li><a href="commande.php">Commande</a></li>
 		   			<li><a href="connexion.php?DECONNEXION=1" name="DECONNEXION">Deconnexion</a></li>
+
 		   		<?php		
 		   		}
 		   	?>
