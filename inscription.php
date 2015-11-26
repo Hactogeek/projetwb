@@ -48,7 +48,10 @@
 						'PASSWORD' => md5($_POST['PASSWORD']),
 						'REGISTRATION_DATE' => date("Y-m-d H:i:s")
 					));
-					header("Location: connexion.php");
+					$req->closeCursor();
+					?>
+						<SCRIPT LANGUAGE="JavaScript">document.location.href="connexion.php"</SCRIPT>
+					<?php
 				}
 				else
 				{
@@ -60,8 +63,11 @@
 				echo "Un utilisateur possède le même email que vous ! ";
 			}
 		}
+		else
+		{
+			echo "La saisie de tout les champs est indispensable pour l'inscription !";
+		}
 	}
-
 ?>
 
 <!DOCTYPE html>
@@ -76,9 +82,9 @@
 		<section>
 		  	<h2>Inscription</h2>
 		  	<form action="inscription.php" method="post" class="inscription">
-			  	<label> Nom :<input class="inputInscription" type="text" name="NAME" /></label><br/>
-			  	<label> Prenom :<input class="inputInscription" type="text" name="FIRST_NAME" /></label><br/>
-				<label> Email :<input class="inputInscription" type="text" name="EMAIL" /></label><br/>
+			  	<label> Nom :<input class="inputInscription" type="text" name="NAME" <?php if(isset($_POST['INSCRIPTION'])){ ?>value=<?php echo $_POST['NAME']; }?> /></label><br/>
+			  	<label> Prenom :<input class="inputInscription" type="text" name="FIRST_NAME" <?php if(isset($_POST['INSCRIPTION'])){ ?>value=<?php echo $_POST['FIRST_NAME']; }?> /></label><br/>
+				<label> Email :<input class="inputInscription" type="text" name="EMAIL" <?php if(isset($_POST['INSCRIPTION'])){ ?>value=<?php echo $_POST['EMAIL']; }?> /></label><br/>
 			  	<label> Mot de passe :<input class="inputInscription" type="password" name="PASSWORD" /></label><br/>
 			  	<label> Confirmation :<input class="inputInscription" type="password" name="PASSWORD_CONFIRM" /></label><br/>
 			  	<div class="centrage">
