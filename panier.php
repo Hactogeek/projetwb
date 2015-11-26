@@ -7,7 +7,7 @@
 	{
 		if(!empty($_POST['DATERECUP']))
 		{
-			$joursem = array('lun', 'mar', 'mer', 'jeu', 'ven', 'sam', 'dim');
+			$joursem = array('dim', 'lun', 'mar', 'mer', 'jeu', 'ven', 'sam');
 			// extraction des jour, mois, an de la date
 			list($date, $time) = explode('T', $_POST['DATERECUP']);
 			list($jour, $mois, $annee) = explode('-', $date);
@@ -20,46 +20,40 @@
 			list($jourResa, $moisResa, $anneeResa) = explode('-', $dateResa);
 			list($heureResa, $minuteResa) = explode(':', $timeResa);*/
 
-
+		
 			if($joursem[date("w",$timestamp)]!='sam' && $joursem[date("w",$timestamp)]!='dim')
 			{
 				if($heure>=8 && $heure<18)
 				{	
-					/*if(($heureResa<$heure && $minuteResa<$minute && $dateResa<=$date && $moisResa<=$mois && $anneeResa<=$anneeResa) || ($dateResa<$date && $moisResa=<$mois && $anneeResa<=$anneeResa) || ($moisResa<=$mois && $anneeResa<=$anee) || ($anneeResa<=$annee))
-					{*/
-						$reponse = $bdd->query('SELECT * FROM VR_grp1_Panier WHERE IDUSER=\''.$_SESSION['ID'].'\'');
-						while ($donnees = $reponse->fetch())
+					$reponse = $bdd->query('SELECT * FROM VR_grp1_Panier WHERE IDUSER=\''.$_SESSION['ID'].'\'');
+					while ($donnees = $reponse->fetch())
+					{
+						$reponse3 = $bdd->query('SELECT * FROM VR_grp1_Jeux WHERE ID=\''.$donnees['IDJEUX'].'\'');
+						while ($donnees3 = $reponse3->fetch())
 						{
-							$reponse3 = $bdd->query('SELECT * FROM VR_grp1_Jeux WHERE ID=\''.$donnees['IDJEUX'].'\'');
-							while ($donnees3 = $reponse3->fetch())
+							if($donnees3['STOCK']!=0)
 							{
-								if($donnees3['STOCK']!=0)
-								{
-									$reponse2= $bdd->prepare('INSERT INTO VR_grp1_Reservation(IDUSER, IDJEUX, DATERESA, DATERECUP) VALUES(:IDUSER, :IDJEUX, :DATERESA, :DATERECUP)');
-									$reponse2->execute(array(
-										'IDUSER' => $_SESSION['ID'],
-										'IDJEUX' => $donnees['IDJEUX'],
-										'DATERESA' => date("Y-m-d\TH:i"),
-										'DATERECUP' => $_POST['DATERECUP']
-										));
-									$reponse2->closeCursor();
-									
-									$reponse4 = $bdd->prepare('UPDATE VR_grp1_Jeux SET STOCK = :NVSTOCK WHERE ID =\''.$donnees3['ID'].'\'');
-									$reponse4->execute(array(
-										'NVSTOCK' => $donnees3['STOCK']-1
-										));
-									$reponse4->closeCursor();
-
-									$bdd->exec('DELETE FROM VR_grp1_Panier WHERE ID=\''.$donnees['ID'].'\'');
-								}
+								$reponse2= $bdd->prepare('INSERT INTO VR_grp1_Reservation(IDUSER, IDJEUX, DATERESA, DATERECUP) VALUES(:IDUSER, :IDJEUX, :DATERESA, :DATERECUP)');
+								$reponse2->execute(array(
+									'IDUSER' => $_SESSION['ID'],
+									'IDJEUX' => $donnees['IDJEUX'],
+									'DATERESA' => date("Y-m-d\TH:i"),
+									'DATERECUP' => $_POST['DATERECUP']
+									));
+								$reponse2->closeCursor();
+								
+								$reponse4 = $bdd->prepare('UPDATE VR_grp1_Jeux SET STOCK = :NVSTOCK WHERE ID =\''.$donnees3['ID'].'\'');
+								$reponse4->execute(array(
+									'NVSTOCK' => $donnees3['STOCK']-1
+									));
+								$reponse4->closeCursor();
+								$bdd->exec('DELETE FROM VR_grp1_Panier WHERE ID=\''.$donnees['ID'].'\'');
 							}
-							$reponse3->closeCursor();
 						}
-						$reponse->closeCursor();
-					/*}
-					else
-						echo "Date de réservation impossible !";*/	
-				}
+						$reponse3->closeCursor();
+					}
+					$reponse->closeCursor();
+				}	
 				else 
 					$erreur=2;
 			}

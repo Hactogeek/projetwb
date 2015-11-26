@@ -10,9 +10,9 @@
 	else
 	{
 		//Pour ce connecter à la BDD  :
-		$dns_bdd="";    					//Adresse du serveur
-		$user_bdd="";						//Id de connection (login)
-		$mdp_bdd="";						//Mot de passe
+		$dns_bdd="mysql:host=info.univ-lemans.fr;dbname=info201a";   //Adresse du serveur
+		$user_bdd="info201a_user";							//Id de connection (login)
+		$mdp_bdd="com72";						//Mot de passe
 	}
 
 	try 
