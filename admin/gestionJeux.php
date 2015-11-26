@@ -1,4 +1,7 @@
 <?php
+	
+	//Lors de la modification d'un jeu, si déjà réserver par un utilisateur, comment gerer le stock
+
 	include('includes/config.php');
 
 	if($_SESSION['connect_admin']==1)
@@ -26,7 +29,17 @@
 		{
 			if(!empty($_POST['NOM']) && !empty($_POST['AGE']) && !empty($_POST['TYPE']) && !empty($_POST['JOUEUR']) && !empty($_POST['QUANTITE']) && !empty($_POST['DESCRIPTION']))
 			{
-				 
+				$reponse4 = $bdd->prepare('UPDATE VR_grp1_Jeux SET NOM = :NVNOM, DESCRIPTION = :NVDESCRIPTION, AGE = :NVAGE, TYPE = :NVTYPE, JOUEUR = :NVJOUEUR, QUANTITE = :NVQUANTITE, STOCK = :NVSTOCK WHERE ID =\''.$_POST['ID'].'\'');
+				$reponse4->execute(array(
+					'NVNOM' => $_POST['NOM'],
+					'NVDESCRIPTION'=> $_POST['DESCRIPTION'],
+					'NVAGE' => $_POST['AGE'],
+					'NVTYPE' => $_POST['TYPE'],
+					'NVJOUEUR' => $_POST['JOUEUR'],
+					'NVQUANTITE' => $_POST['QUANTITE'],
+					'NVSTOCK' => $_POST['QUANTITE']
+				)); 
+				
 				header("Location: gestionJeux.php");
 			}
 		}
@@ -77,12 +90,13 @@
 
 					while ($donnees = $reponse->fetch())
 					{
+						$nom = $donnees['NOM'];
 						?>
 							<article>
 								<h3>Modification du jeu : <?php echo $donnees['NOM']; ?></h3>
 								<form class="modifier" action="gestionJeux.php" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="ID" value=<?php echo $donnees['ID']; ?> />
-							  		<label>Nom du jeux : <input class="inputInscription" type="text" name="NOM" value=<?php echo $donnees['NOM']; ?> /></label><br/>
+							  		<label>Nom du jeux : <input class="inputInscription" type="text" name="NOM" <?php echo "value='$nom'"; ?> /></label><br/>
 							  		<!--<label>Image du jeux :<input class="inputInscription" name="IMAGE" type="file" multiple="false"/></label><br/>-->
 							  		<label> Age :
 							  			<?php 
@@ -212,7 +226,7 @@
 							  		<label>Quantité :<input class="inputInscription" type="number" name="QUANTITE" value=<?php echo $donnees['QUANTITE']; ?> /></label><br/>
 							  		<label>Description :</label><br/>
 							  		<textarea name="DESCRIPTION"><?php echo $donnees['DESCRIPTION']; ?></textarea><br/>
-							  		<input type="submit" name="MODIFIERTRAITEMENT" value="Modifier"/>
+ 							  		<input type="submit" name="MODIFIERTRAITEMENT" value="Modifier"/>
 							  	</form>
 							</article><hr/>
 						<?php

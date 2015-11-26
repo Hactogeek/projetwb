@@ -1,5 +1,14 @@
 <?php
 	include('includes/config.php');
+
+	if(isset($_POST['RESERVER']))
+	{
+		$req = $bdd->prepare('INSERT INTO VR_grp1_Panier(IDUSER, IDJEUX) VALUES(:IDUSER, :IDJEUX)');
+		$req->execute(array(
+			'IDUSER' => $_SESSION['ID'],
+			'IDJEUX' => $_POST['ID']
+			));
+	}
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +22,12 @@
 		<?php include("includes/header.php"); ?>
   		<section>
   			<h2>Inventaire</h2>
+  			<?php
+  				if(isset($_POST['RESERVER']))
+  				{
+  					echo "La jeu a été ajouté au panier !";
+  				}
+  			?>
 	  		<table>
 	  			<tr>
 	  				<th>Image</th>
@@ -39,7 +54,7 @@
 					  			if($_SESSION['connect']==1)
 					  			{
 					  				?>
-						  			<td><form action="reserver.php" method="post">
+						  			<td><form action="index.php" method="post">
 						  				<input type="hidden" name="ID" value=<?php echo $donnees['ID']; ?> />
 						  				<input type="submit" name="RESERVER" value="RESERVER"/>
 						  			</form></td>
