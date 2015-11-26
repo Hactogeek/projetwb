@@ -10,20 +10,20 @@
     <form method="post" action="rechercher.php">
     <fieldset>
       <p><legend> Quel jeu souhaitez-vous ? </legend></p>
-      <p><select name="type"></p>
-       <option value="société">Jeux de société </option>
-        <option value="carte">Jeux de carte </option>
-        <option value="voiture">Jeux de voiture </option>
-        <option value="figurine">Jeux de figurine </option>
-       <option value="bille">Jeux de bille </option>
+      <p><select name="TYPE"></p>
+       <option value="SOCIETE">Jeux de société </option>
+        <option value="CARTE">Jeux de carte </option>
+        <option value="VOITURE">Jeux de voiture </option>
+        <option value="FIGURINE">Jeux de figurine </option>
+       <option value="BILLE">Jeux de bille </option>
      </select>*
 
      <p><select name="age"></p>
-       <option value="2">Jeux entre 2 ans et 6 ans </option>
-       <option value="6">Jeux entre 6 ans et 10 ans </option>
-       <option value="10">Jeux entre 10 ans et 14 ans </option>
-        <option value="14">Jeux entre 14 ans et plus </option>
-     </select>
+       <option value=2>Jeux entre 2 ans et 6 ans </option>
+       <option value=6>Jeux entre 6 ans et 10 ans </option>
+       <option value=10>Jeux entre 10 ans et 14 ans </option>
+        <option value=14>Jeux entre 14 ans et plus </option>
+     </select>*
 
   <!-- Faire des ajouts en fonction de l'évolution de la base de donnée -->
     
