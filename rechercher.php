@@ -5,11 +5,11 @@
 		<link rel="stylesheet" type="text/css" href="styles/style.css">
 		<title> - Jeux recherchés - </title>
 	</head>
-	<body><?php
-$Serveur="info.univ-lemans.fr";
+	<body><?php include("includes/header.php"); include('includes/config.php'); ?><?php
+$Serveur="";
 $Utilisateur="";
 $MotDePasse="";
-$Base="info201a";
+$Base="";
 $LienBase=mysql_connect($Serveur,$Utilisateur,$MotDePasse);
 $retour=mysql_select_db($Base,$LienBase);
 if(!$retour)
@@ -20,14 +20,31 @@ if(isset($_POST["Rechercher"]))
   {
     $type = $_POST["type"];
     $age = $_POST["age"];
-    $age4 = $age + 4;
-    $Requete='SELECT * FROM VR_grp1_Jeux WHERE Ages ='.$age.'  ';
-    $Reponse = mysql_query($Requete);
-    while ($donnees = mysql_fetch_array($Reponse) )
+    $nom = $_POST["nomJeu"];
+    $age4 = $age+4;
+    $Reponse=$bdd->query('SELECT * FROM VR_grp1_Jeux WHERE AGE BETWEEN '.$age.' AND '.$age4.' AND TYPE LIKE "'.$type.'" AND NOM LIKE "'.$nom.'" '); // AND TYPE LIKE "'.$type.'" AND NOM LIKE "'.$nom.'"
+    //$Reponse = mysql_query($Requete);
+    ?>
+    <p><?php echo "Voici la liste des jeux d'au moins ".$age." ans que vous avez demandé : "; ?> </p> <?php
+    ?>
+    				<table>
+			  			<tr>
+			  				<th> Type de jeu </th>
+							<th> Nom du jeu </th>
+						</tr>
+	<?php
+    while ($donnees = $Reponse->fetch())
     {
+    ?>
+						<tr>
+							<td><?php echo $donnees['TYPE']; ?></td>
+					  		<td><?php echo $donnees['NOM']; ?></td>					  		
+					  	</tr>
+					
+	<?php	
+	?></table><?php				  		
     //Affichage des lignes de données, champ par champ
     //echo "Numero: ".$donnees[0]." ,Equipe:". $donnees[1];
-      echo "Voici la liste des jeux que vous avez demandé : Pour les jeux de ".$donnees['Ages']." ans, on a le jeu ".$donnees['Nom'].$donnees['Typejeux'];
     }
       //echo "Voici la liste des jeux que vous avez demandé :".$Reponse;
     
