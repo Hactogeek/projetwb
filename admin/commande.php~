@@ -48,7 +48,7 @@
 	  				<th>Date recupération</th>
 	  			</tr>
 	  			<?php
-					$reponse = $bdd->query('SELECT * FROM VR_grp1_Reservation p RIGHT JOIN VR_grp1_Users u ON p.IDUSER = u.ID INNER JOIN VR_grp1_Jeux j ON p.IDJEUX = j.ID ORDER BY DATERECUP');
+					$reponse = $bdd->query('SELECT * FROM VR_grp1_Reservation p RIGHT JOIN VR_grp1_Users u ON p.IDUSER = u.ID RIGHT JOIN VR_grp1_Jeux j ON p.IDJEUX = j.ID ORDER BY DATERECUP');
 
 					while ($donnees = $reponse->fetch())
 					{
